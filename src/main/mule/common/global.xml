@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	    <http:listener-config name="gob-sapi-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="${http.listener.port}" />
+    </http:listener-config>
+    <apikit:config name="gob-sapi-config"  api="resource::4aeda67f-fb46-4c07-b589-cb3b6003cf5d:gob-sapi:1.0.0:raml:zip:gob-sapi.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<configuration-properties doc:name="Configuration properties" doc:id="ab7fda32-59ac-4a1d-966f-6b558fa7aac6" file="properties\\common.properties" />
+	<configuration-properties doc:name="Configuration properties" doc:id="78974b53-74a2-4c03-a9e4-853e4faffdbd" file="properties\\${env}.properties" />
+	<http:request-config  name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="b10f84c4-dd2d-45ec-a05f-1761ebd4701f" basePath="/apidata" >
+		<http:request-connection protocol="HTTPS" host="${gob.host}" />
+	</http:request-config>
+	<!-- <api-gateway:autodiscovery apiId="${apiAutoDiscovery.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="08d25561-9c63-4d49-86b8-eadec9bc3c5a" flowRef="gob-sapi-main" /> -->
+	
+	
+</mule>
