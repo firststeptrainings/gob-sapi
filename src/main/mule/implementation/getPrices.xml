@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+	<sub-flow name="getPricesSub_Flow" doc:id="6bce2aab-5103-4ce1-9cf2-0a129762787d" >
+		<logger level="INFO" doc:name="getPricesSub_Flow Start Logger" doc:id="13229e34-67a1-45ab-b0a5-3dfef2eec640" message="getPricesSub_Flow Start Logger"/>
+		<logger level="DEBUG" doc:name="Debug Request Logger" doc:id="91e719e0-86d9-4972-a583-10b8f9df9665" message="Get Prices Input Parameters #[attributes]" category="io.dataskate.gob.sapi.prices.get"/>
+		<http:request method="GET" doc:name="GOB Prices Request" doc:id="d77142d9-654e-49e5-b5ad-4cbf1a614c82" config-ref="HTTP_Request_configuration" path="${gob.prices.path}"/>
+		<logger level="DEBUG" doc:name="Debug Response Logger" doc:id="803cde9a-b649-4187-ba4d-ac3da30c03c5" message="Get Prices Response from Target System is #[payload]" category="io.dataskate.gob.sapi.prices.get"/>
+		<logger level="INFO" doc:name="getPricesSub_Flow End Logger" doc:id="18c201e6-717d-4a53-bd16-319fdedd0d88" message="getPricesSub_Flow End Logger"/>
+	</sub-flow>
+</mule>
